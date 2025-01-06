@@ -9,8 +9,6 @@ function App() {
   let [per_page, setPer_page] = useState(10);
   let [loading, setLoading] = useState(false);
   let api = '-BsUDI2UUH9LOsrZ8wryEVh95FQ_W0NsugTFsIAhf2Y';
-  console.log('app',query);
-  // console.log(data);
   const getData = async () => {
     setLoading(true);
     let responce = await fetch(`https://api.unsplash.com/search/photos?client_id=${api}&query=${query}&page=${page}&per_page=${per_page}`);
@@ -18,27 +16,36 @@ function App() {
     setData((old) => [...old, ...data.results]);
     setLoading(false);
   }
-  // useEffect(() => {
-  //   let handleScroll = () => {
-  //     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
-  //       setPage((pre) => pre + 1);
-  //     }
-  //   }
-  //   return () => {
-  //     window.addEventListener('scroll', handleScroll)
-  //   }
-
-  // }, [])
-
-  let handleScroll = () => {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
-      setPage((pre) => pre + 1);
+  useEffect(() => {
+    let handleScroll = () => {
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
+        setPage((pre) => pre + 1);
+      }
     }
-  }
-  window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+
+  }, [])
+
+  // let handleScroll = () => {
+  //   let jitnaDikhRah = window.innerHeight;
+  //   let jitnaScrollHochuka = window.scrollY;
+  //   let jitnaContentHein = document.body.offsetHeight;
+  //   console.log(jitnaDikhRah, "jitna dikh rah hein")
+  //   console.log(jitnaScrollHochuka, "jitna scroll ho chuka")
+  //   console.log(jitnaContentHein, "jitna cintent hein total")
+  //   if ((window.innerHeight + window.scrollY + 1) >= document.body.offsetHeight ) {
+  //     setPage((pre) => pre + 1);
+  //   }
+  // }
+  // window.addEventListener('scroll', handleScroll);
+
   useEffect(() => {
     getData();
   }, [page])
+
   return (
     <>
     <Navbar setQuery={setQuery} setData = {setData} getData={getData}/>

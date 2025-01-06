@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import '../App.css'
 const Navbar = ({setQuery, setData, getData}) => {
     let [searchKey, setSearchKey] = useState('');
-    console.log('navbar', searchKey);
   return (
     <div className="navbar">
         <h1>Unsplash.com</h1>
