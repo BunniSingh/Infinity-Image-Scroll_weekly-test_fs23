@@ -18,18 +18,24 @@ function App() {
     setData((old) => [...old, ...data.results]);
     setLoading(false);
   }
-  useEffect(() => {
-    let handleScroll = () => {
-      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
-        setPage((pre) => pre + 1);
-      }
-    }
-    return () => {
-      window.addEventListener('scroll', handleScroll)
-    }
+  // useEffect(() => {
+  //   let handleScroll = () => {
+  //     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
+  //       setPage((pre) => pre + 1);
+  //     }
+  //   }
+  //   return () => {
+  //     window.addEventListener('scroll', handleScroll)
+  //   }
 
-  }, [])
+  // }, [])
 
+  let handleScroll = () => {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1) {
+      setPage((pre) => pre + 1);
+    }
+  }
+  window.addEventListener('scroll', handleScroll)
   useEffect(() => {
     getData();
   }, [page])
